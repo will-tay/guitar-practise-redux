@@ -1,7 +1,7 @@
 {
-  "name": "mf-approval-privilages",
-  "version": "1.0.0",
-  "description": "Approval privilages service micro frontend",
+  "name": "guitar-practise-redux",
+  "version": "0.0.0001",
+  "description": "guitar practise app",
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
