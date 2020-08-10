@@ -30,3 +30,13 @@ export const getActiveExercise = createSelector(
   getActiveExerciseId,
   (exercises, key) => exercises[key]
 )
+
+export const getIsExerciseCompleted = (id: string) => createSelector(
+  exercisesSelector,
+  (state) => (state.completedIds.indexOf(id) !== -1)
+)
+
+export const getAreExercisesComplete = createSelector(
+  exercisesSelector,
+  (state) => (state.availableIds.length === 0)
+)
