@@ -21,7 +21,7 @@ const styles = ({ palette }: Theme) => createStyles({
     alignItems: 'center'
   },
   container: {
-    maxWidth: '1400px',
+    width: '1400px',
     margin: '0 auto'
   }
 })
