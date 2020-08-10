@@ -1,16 +1,16 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-// import mediaReducer, { IUsersState } from './ducks/users'
+import exercisesReducer, { IExercisesState } from './ducks/exercises'
 // import assetGroupsReducer, { ILocationsState } from './ducks/locations'
-// import KEYS from './storeKeys'
+import KEYS from './storeKeys'
 
-// export interface IRootState {
-//   [KEYS.USERS]: IMediaState
+export interface IRootState {
+  [KEYS.EXERCISES]: IExercisesState
 //   [KEYS.LOCATIONS]: IAssetGroupsState
-// }
+}
 
 const rootReducer = combineReducers({
-  // [KEYS.USERS]: mediaReducer,
+  [KEYS.EXERCISES]: exercisesReducer
   // [KEYS.LOCATIONS]: assetGroupsReducer,
 })
 
