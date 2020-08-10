@@ -20,6 +20,7 @@ export interface IListOfExercises {
 }
 
 export const nextExercise: ActionCreatorWithoutPayload = createAction('nextExercise')
+export const resetExercises: ActionCreatorWithoutPayload = createAction('resetExercises')
 
 const initialState: IExercisesState = {
   byId: listOfExercises,
@@ -33,6 +34,12 @@ const reducer = createReducer(initialState, {
   [nextExercise.type]: (state) => {
     const availableIds = state.availableIds.filter(id => id !== state.activeExercise)
     state.completedIds = [...state.completedIds, state.activeExercise]
+    state.activeExercise = availableIds[Math.floor(Math.random() * availableIds.length)]
+    state.availableIds = availableIds
+  },
+  [resetExercises.type]: (state) => {
+    const availableIds = state.allIds
+    state.completedIds = []
     state.activeExercise = availableIds[Math.floor(Math.random() * availableIds.length)]
     state.availableIds = availableIds
   }

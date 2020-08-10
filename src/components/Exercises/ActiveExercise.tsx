@@ -1,18 +1,32 @@
 import React, { FunctionComponent } from 'react'
 import { connect } from 'react-redux'
+import { Typography } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
 
 import { IRootState } from '../../store/rootReducer'
 import { getActiveExercise, IExercise } from '../../store/ducks/exercises'
 
 interface IActiveExercise {
+  classes: {
+    container: string
+  }
   exercise?: IExercise
-  // id: string
 }
 
-export const ActiveExercise: FunctionComponent<IActiveExercise> = ({ exercise }) => (
-  <div>
-    {exercise &&
-      <div>ACTIVE EXERCISE IS: { exercise.title }</div>
+const styles = ({
+  container: {
+    minWidth: '100%'
+  }
+})
+
+export const ActiveExercise: FunctionComponent<IActiveExercise> = ({ classes, exercise }) => (
+  <div className={classes.container}>
+    {exercise
+      ? <>
+        <Typography>{ exercise.title }</Typography>
+        <Typography>{ exercise.desc }</Typography>
+      </>
+      : <Typography>Every exercise completed, well done!</Typography>
     }
   </div>
 )
@@ -21,4 +35,4 @@ const mapStateToProps = (state: IRootState) => ({
   exercise: getActiveExercise(state)
 })
 
-export default connect(mapStateToProps)(ActiveExercise)
+export default withStyles(styles)(connect(mapStateToProps)(ActiveExercise))

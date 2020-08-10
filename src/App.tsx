@@ -1,7 +1,9 @@
 import React, { FunctionComponent } from 'react'
 // import TagManager from 'react-gtm-module'
 import { ToastProvider } from 'react-toast-notifications'
+import { CssBaseline } from '@material-ui/core'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { amber, deepPurple } from '@material-ui/core/colors'
 
 import createProvider from './components/Error/ErrorBoundary'
 import MainView from './components/MainView'
@@ -14,14 +16,10 @@ import rootSaga from './store/rootSaga'
 // }
 
 const theme = createMuiTheme({
-  // palette: {
-  //   primary: {
-  //     main: purple[500],
-  //   },
-  //   secondary: {
-  //     main: green[500],
-  //   },
-  // },
+  palette: {
+    primary: deepPurple,
+    secondary: amber
+  }
 })
 
 const AppProvider = createProvider(rootReducer, rootSaga)
@@ -29,13 +27,16 @@ const AppProvider = createProvider(rootReducer, rootSaga)
 // TagManager.initialize(tagManagerArgs)
 
 const App: FunctionComponent = () => (
-  <ToastProvider autoDismiss>
-    <ThemeProvider theme={theme}>
-      <AppProvider>
-        <MainView />
-      </AppProvider>
-    </ThemeProvider>
-  </ToastProvider>
+  <>
+    <CssBaseline />
+    <ToastProvider autoDismiss>
+      <ThemeProvider theme={theme}>
+        <AppProvider>
+          <MainView />
+        </AppProvider>
+      </ThemeProvider>
+    </ToastProvider>
+  </>
 )
 
 export default App

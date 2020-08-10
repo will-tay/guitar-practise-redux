@@ -12,11 +12,12 @@ interface INextExerciseButton {
 }
 
 export const NextExerciseButton: FunctionComponent<INextExerciseButton> = ({ isExercisesAllCompleted, nextExercise }) => {
+  const handleClick = () => nextExercise()
   return (
     <Button
       color={'primary'}
       disabled={isExercisesAllCompleted}
-      onClick={nextExercise}
+      onClick={handleClick}
       variant={'contained'}
     >
       NEXT

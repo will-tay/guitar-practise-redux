@@ -40,3 +40,8 @@ export const getAreExercisesComplete = createSelector(
   exercisesSelector,
   (state) => (state.availableIds.length === 0)
 )
+
+export const getAreExercisesInProgress = createSelector(
+  exercisesSelector,
+  (state) => (state.completedIds.length > 0)
+)
