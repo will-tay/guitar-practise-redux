@@ -1,6 +1,5 @@
 enum KEYS {
-  USERS = 'USERS',
-  LOCATIONS = 'LOCATIONS',
+  EXERCISES = 'EXERCISES'
 }
 
 export default KEYS
