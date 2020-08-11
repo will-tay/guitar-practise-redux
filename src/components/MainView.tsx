@@ -17,7 +17,6 @@ interface IMainView {
 const styles = ({ palette, spacing }: Theme) => createStyles({
   appBackground: {
     background: palette.background.default,
-    // height: '100vh',
     boxSizing: 'border-box',
     display: 'flex',
     justifyContent: 'center',
@@ -28,13 +27,13 @@ const styles = ({ palette, spacing }: Theme) => createStyles({
     margin: '0 auto'
   },
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
-    marginRight: spacing(2),
+    marginRight: spacing(2)
   },
   title: {
-    flexGrow: 1,
+    flexGrow: 1
   }
 })
 
@@ -42,10 +41,10 @@ const MainView: FunctionComponent<IMainView> = ({ classes }) => (
   <>
     <AppBar position='static'>
       <Toolbar>
-        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+        <IconButton edge='start' className={classes.menuButton} color='inherit' aria-label='menu'>
           <Menu />
         </IconButton>
-        <Typography variant="h6" className={classes.title}>
+        <Typography variant='h6' className={classes.title}>
           Guitar Malpractise
         </Typography>
       </Toolbar>
