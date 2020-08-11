@@ -9,7 +9,7 @@ import ExerciseItem from './ExerciseItem'
 
 const styles = ({ palette }: Theme) => createStyles({
   background: {
-    backgroundColor: palette.secondary.main
+    backgroundColor: palette.primary.main
   }
 })
 
