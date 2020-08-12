@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 
 import { IRootState } from '../../store/rootReducer'
 import { getActiveExercise, IExercise } from '../../store/ducks/exercises'
+import Timer from './Timer'
 
 interface IActiveExercise {
   classes: {
@@ -25,6 +26,7 @@ export const ActiveExercise: FunctionComponent<IActiveExercise> = ({ classes, ex
       ? <>
         <Typography>{ exercise.title }</Typography>
         <Typography>{ exercise.desc }</Typography>
+        <Timer />
       </>
       : <Typography>Every exercise completed, well done!</Typography>
     }

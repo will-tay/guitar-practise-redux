@@ -13,6 +13,7 @@ export interface IExercise {
   id: string
   title: string
   desc: string
+  time: number
 }
 
 export interface IListOfExercises {
