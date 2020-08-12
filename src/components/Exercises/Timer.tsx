@@ -28,8 +28,8 @@ export const Timer: FunctionComponent<ITimer> = ({ classes, exercise }) => {
   const [start, setStart] = useState(0)
   const [timeReached, setTimeReached] = useState(false)
   useEffect(() => {
-    if (isOn){
-      let timer = setInterval(() => {
+    if (isOn) {
+      const timer = setInterval(() => {
         setTime((Date.now() - start))
       }, 1000)
       return () => {
