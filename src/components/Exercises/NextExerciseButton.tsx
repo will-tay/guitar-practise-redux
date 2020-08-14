@@ -11,19 +11,16 @@ interface INextExerciseButton {
   nextExercise: typeof nextExercise
 }
 
-export const NextExerciseButton: FunctionComponent<INextExerciseButton> = ({ isExercisesAllCompleted, nextExercise }) => {
-  const handleClick = () => nextExercise()
-  return (
-    <Button
-      color={'primary'}
-      disabled={isExercisesAllCompleted}
-      onClick={handleClick}
-      variant={'contained'}
-    >
-      NEXT
-    </Button>
-  )
-}
+export const NextExerciseButton: FunctionComponent<INextExerciseButton> = ({ isExercisesAllCompleted, nextExercise }) => (
+  <Button
+    color={'primary'}
+    disabled={isExercisesAllCompleted}
+    onClick={nextExercise}
+    variant={'contained'}
+  >
+    NEXT
+  </Button>
+)
 
 const mapStateToProps = (state: IRootState) => ({
   isExercisesAllCompleted: getAreExercisesComplete(state)

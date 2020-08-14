@@ -1,56 +1,31 @@
 import React, { FunctionComponent } from 'react'
-import { AppBar, IconButton, Toolbar, Typography, Grid } from '@material-ui/core'
+import { AppBar, Box, Container, IconButton, Toolbar, Typography, Grid } from '@material-ui/core'
 import { Menu } from '@material-ui/icons'
-import { createStyles, Theme, withStyles } from '@material-ui/core/styles'
 
 import { ActiveExercise, ExerciseList, NextExerciseButton, ResetExercisesButton } from './Exercises'
 
-interface IMainView {
-  classes: {
-    appBackground: string
-    container: string
-    menuButton: string
-    title: string
-  }
-}
-
-const styles = ({ palette, spacing }: Theme) => createStyles({
-  appBackground: {
-    background: palette.background.default,
-    boxSizing: 'border-box',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  container: {
-    width: '1400px',
-    margin: '0 auto'
-  },
-  root: {
-    flexGrow: 1
-  },
-  menuButton: {
-    marginRight: spacing(2)
-  },
-  title: {
-    flexGrow: 1
-  }
-})
-
-const MainView: FunctionComponent<IMainView> = ({ classes }) => (
+const MainView: FunctionComponent = () => (
   <>
     <AppBar position='static'>
-      <Toolbar>
-        <IconButton edge='start' className={classes.menuButton} color='inherit' aria-label='menu'>
-          <Menu />
-        </IconButton>
-        <Typography variant='h6' className={classes.title}>
-          Guitar Malpractise
-        </Typography>
-      </Toolbar>
+      <Container>
+        <Toolbar>
+          <IconButton edge='start' color='inherit' aria-label='menu'>
+            <Menu />
+          </IconButton>
+          <Typography variant='h6'>
+            Guitar Malpractise
+          </Typography>
+        </Toolbar>
+      </Container>
     </AppBar>
-    <div className={classes.appBackground}>
-      <div className={classes.container}>
+    <Box
+      display={'flex'}
+      justifyContent={'center'}
+      alignItems={'center'}
+      boxSizing={'border-box'}
+      bgcolor={'background.default'}
+    >
+      <Container>
         <Grid container spacing={2}>
           <Grid
             item
@@ -64,20 +39,22 @@ const MainView: FunctionComponent<IMainView> = ({ classes }) => (
             md={9}
             xs={12}
           >
-            <ActiveExercise />
-          </Grid>
-          <Grid
-            item
-            md={6}
-            xs={12}
-          >
-            <NextExerciseButton />
-            <ResetExercisesButton />
+            <Box
+              display={'flex'}
+              flexDirection={'column'}
+              height={'100%'}
+            >
+              <ActiveExercise />
+              <Box mt={'auto'}>
+                <NextExerciseButton />
+                <ResetExercisesButton />
+              </Box>
+            </Box>
           </Grid>
         </Grid>
-      </div>
-    </div>
+      </Container>
+    </Box>
   </>
 )
 
-export default withStyles(styles)(MainView)
+export default MainView

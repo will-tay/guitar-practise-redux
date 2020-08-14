@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import formatTime from 'pretty-ms'
 import { withStyles } from '@material-ui/core/styles'
-import { IconButton, Typography } from '@material-ui/core'
+import { Box, Button, ButtonGroup, LinearProgress, Typography } from '@material-ui/core'
 import { PlayArrow, Stop, Refresh } from '@material-ui/icons'
 
 import { IRootState } from '../../store/rootReducer'
@@ -10,7 +10,7 @@ import { getActiveExercise, IExercise } from '../../store/ducks/exercises'
 
 interface ITimer {
   classes: {
-    timesUp: string
+    [key: string]: string
   }
   exercise: IExercise
 }
@@ -18,11 +18,17 @@ interface ITimer {
 const styles = ({
   timesUp: {
     background: 'red'
+  },
+  transitionOverride: {
+    transition: 'transform 1s linear'
+  },
+  progressBar: {
+    width: '100%'
   }
 })
 
 export const Timer: FunctionComponent<ITimer> = ({ classes, exercise }) => {
-  const prevExercise = usePrevious(exercise)
+  const prevExerciseId = usePrevious(exercise.id)
   const [time, setTime] = useState(0)
   const [isOn, setIsOn] = useState(false)
   const [start, setStart] = useState(0)
@@ -44,7 +50,8 @@ export const Timer: FunctionComponent<ITimer> = ({ classes, exercise }) => {
     }
   }, [time])
   useEffect(() => {
-    if (prevExercise !== exercise) {
+    if (prevExerciseId !== exercise.id) {
+      stopTimer()
       resetTimer()
     }
   }, [exercise])
@@ -60,31 +67,46 @@ export const Timer: FunctionComponent<ITimer> = ({ classes, exercise }) => {
     setTimeReached(false)
   }
   return (
-    <>
-      <IconButton
-        disabled={isOn || timeReached}
-        onClick={startTimer}
-      >
-        <PlayArrow />
-      </IconButton>
-      <IconButton
-        disabled={!isOn}
-        onClick={stopTimer}
-      >
-        <Stop />
-      </IconButton>
-      <IconButton
-        disabled={isOn || (time === 0)}
-        onClick={resetTimer}
-      >
-        <Refresh />
-      </IconButton>
+    <Box
+      display={'flex'}
+      flexDirection={'column'}
+      justifyContent={'center'}
+      alignItems={'center'}
+    >
+      <LinearProgress
+        classes={{
+          bar1Determinate: classes.transitionOverride
+        }}
+        className={classes.progressBar}
+        variant={'determinate'}
+        value={(time / exercise.time * 100)}
+      />
       <Typography
         className={timeReached ? classes.timesUp : ''}
       >
         Time: { time === 0 ? '0:00' : formatTime(time, { colonNotation: true, secondsDecimalDigits: 0 })} / {formatTime(exercise.time, { colonNotation: true })}
       </Typography>
-    </>
+      <ButtonGroup variant='contained' color='primary' aria-label='contained primary button group'>
+        <Button
+          disabled={isOn || timeReached}
+          onClick={startTimer}
+        >
+          <PlayArrow />
+        </Button>
+        <Button
+          disabled={!isOn}
+          onClick={stopTimer}
+        >
+          <Stop />
+        </Button>
+        <Button
+          disabled={isOn || (time === 0)}
+          onClick={resetTimer}
+        >
+          <Refresh />
+        </Button>
+      </ButtonGroup>
+    </Box>
   )
 }
 

@@ -11,19 +11,16 @@ interface IResetExercisesButton {
   isExerciseInProgress: boolean
 }
 
-export const ResetExercisesButton: FunctionComponent<IResetExercisesButton> = ({ isExerciseInProgress, resetExercises }) => {
-  const handleClick = () => resetExercises()
-  return (
-    <Button
-      color={'primary'}
-      disabled={!isExerciseInProgress}
-      onClick={handleClick}
-      variant={'contained'}
-    >
-      RESET
-    </Button>
-  )
-}
+export const ResetExercisesButton: FunctionComponent<IResetExercisesButton> = ({ isExerciseInProgress, resetExercises }) => (
+  <Button
+    color={'primary'}
+    disabled={!isExerciseInProgress}
+    onClick={resetExercises}
+    variant={'contained'}
+  >
+    RESET
+  </Button>
+)
 
 const mapStateToProps = (state: IRootState) => ({
   isExerciseInProgress: getAreExercisesInProgress(state)
