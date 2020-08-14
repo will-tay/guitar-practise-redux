@@ -1,29 +1,22 @@
 import React, { FunctionComponent } from 'react'
 import { connect } from 'react-redux'
-import { List, ListItem, Typography } from '@material-ui/core'
-import { Theme, createStyles, withStyles } from '@material-ui/core/styles'
+import { Box, List, ListItem, Paper, Typography } from '@material-ui/core'
 
 import { IRootState } from '../../store/rootReducer'
 import { getAllIds, getExercises, IListOfExercises } from '../../store/ducks/exercises'
 import ExerciseItem from './ExerciseItem'
 
-const styles = ({ palette }: Theme) => createStyles({
-  background: {
-    backgroundColor: palette.primary.main
-  }
-})
-
 interface IExerciseList {
-  classes: {
-    background: string
-  }
   exercises?: IListOfExercises
   ids: Array<string>
 }
 
-export const ExerciseList: FunctionComponent<IExerciseList> = ({ classes, exercises, ids }) => (
-  <div className={classes.background}>
-    <Typography>Exercises</Typography>
+export const ExerciseList: FunctionComponent<IExerciseList> = ({ exercises, ids }) => (
+  <Box
+    component={Paper}
+    p={'1rem'}
+  >
+    <Typography>Exercise List</Typography>
     <List>
       { ids.map(exerciseKey => (
         <ListItem key={`exericse_${exercises[exerciseKey].id}`}>
@@ -33,7 +26,7 @@ export const ExerciseList: FunctionComponent<IExerciseList> = ({ classes, exerci
         </ListItem>
       ))}
     </List>
-  </div>
+  </Box>
 )
 
 const mapStateToProps = (state: IRootState) => ({
@@ -41,8 +34,4 @@ const mapStateToProps = (state: IRootState) => ({
   ids: getAllIds(state)
 })
 
-export default withStyles(styles)(
-  connect(
-    mapStateToProps
-  )(ExerciseList)
-)
+export default connect(mapStateToProps)(ExerciseList)
